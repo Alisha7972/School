@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <!-- end header section -->
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <h2 class="main-heading">Contact Now</h2>
+      <p class="text-center">reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla</p>
+
+      <!-- show uploaded image when view passes submitted_image_url -->
+      {% if submitted_image_url %}
+        <div class="text-center my-3">
+          <img src="{{ submitted_image_url }}" alt="Uploaded image" style="max-width:100%;height:auto;" />
+        </div>
+      {% endif %}
+
+      <div class="">
+        <div class="contact_section-container">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <div class="contact-form">
+                <!-- add enctype for file upload -->
+                <form method="POST" action="{% url 'contact_submit' %}" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div>
+                    <input type="text" name="name" placeholder="Name" />
+                  </div>
+                  <div>
+                    <input type="text" name="phone" placeholder="Phone Number" />
+                  </div>
+                  <div>
+                    <input type="email" name="email" placeholder="Email" />
+                  </div>
+
+                  <!-- file input + client preview -->
+                  <div>
+                    <input type="file" name="image" id="imageInput" accept="image/*" />
+                  </div>
+                  <div id="previewContainer" class="text-center my-2" style="display:none;">
+                    <img id="imagePreview" src="#" alt="Preview" style="max-width:100%;height:auto;" />
+                  </div>
+
+                  <div>
+                    <input type="text" name="message" placeholder="Message" class="input_message" />
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn_on-hover">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+  <!-- footer section -->
+
+  <script>
+    // simple client-side preview
+    ;(function () {
+      const input = document.getElementById('imageInput')
+      const preview = document.getElementById('imagePreview')
+      const container = document.getElementById('previewContainer')
+      if (!input) return
+      input.addEventListener('change', function () {
+        const file = input.files && input.files[0]
+        if (!file) {
+          container.style.display = 'none'
+          return
+        }
+        const reader = new FileReader()
+        reader.onload = function (e) {
+          preview.src = e.target.result
+          container.style.display = 'block'
+        }
+        reader.readAsDataURL(file)
+      })
+    })()
+  </script>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <!-- end header section -->
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <h2 class="main-heading">Contact Now</h2>
+      <p class="text-center">reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla</p>
+      <div class="">
+        <div class="contact_section-container">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <div class="contact-form">
+                <form method="POST" action="{% url 'contact_submit' %}">
+                  {% csrf_token %}
+                  <div>
+                    <input type="text" name="name" placeholder="Name" />
+                  </div>
+                  <div>
+                    <input type="text" name="phone" placeholder="Phone Number" />
+                  </div>
+                  <div>
+                    <input type="email" name="email" placeholder="Email" />
+                  </div>
+                  <div>
+                    <input type="text" name="message" placeholder="Message" class="input_message" />
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn_on-hover">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+  <!-- footer section -->
+{% endblock %} {% endcomment %}

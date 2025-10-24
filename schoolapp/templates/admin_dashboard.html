@@ -1,0 +1,41 @@
+{% extends 'admin/base_site.html' %}
+{% block title %}
+  Custom Admin Dashboard
+{% endblock %}
+
+{% block content %}
+  <h1>Welcome to Custom Admin Dashboard</h1>
+
+  <div style="margin-top:20px;">
+    <h2>Recent Contacts</h2>
+    <table border="1" cellpadding="8">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+      </tr>
+      {% for c in contacts %}
+        <tr>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.message }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No contact messages found</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div style="margin-top:20px;">
+    <h2>Teachers</h2>
+    <ul>
+      {% for t in teachers %}
+        <li>{{ t.name }} ({{ t.subject }})</li>
+      {% empty %}
+        <li>No teachers yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

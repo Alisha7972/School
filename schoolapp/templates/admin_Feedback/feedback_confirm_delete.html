@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h3>Delete feedback by "{{ feedback.student_name }}"?</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'admin_feedback_list' %}">Cancel</a>
+  </form>
+{% endblock %}
