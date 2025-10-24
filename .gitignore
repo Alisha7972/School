@@ -1,0 +1,23 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+/media/
+staticfiles/
+
+# Virtual environment
+venv/
+env/
+Scripts/
+Lib/
+Include/
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+*.env
+
+# Migrations (optional, if not needed)
+*/migrations/__pycache__/
